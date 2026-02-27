@@ -1,0 +1,19 @@
+# Compiled Executables (Windows)
+*.exe
+*.out
+*.app
+
+# Object files and Libraries
+*.o
+*.obj
+*.a
+*.lib
+
+# Debug symbols and IDE folders
+.vscode/
+*.dSYM/
+.DS_Store
+
+# Intermediate build files
+*.i
+*.s
