@@ -2,8 +2,6 @@
 
 > A C11 project demonstrating the behavioral difference between **local (auto)** and **static local** variables, with real-world embedded firmware use-cases.
 
----
-
 ## Table of Contents
 
 - [Overview](#overview)
@@ -56,7 +54,7 @@ project/
 
 ## Key Concepts
 
-1. Memory Lifetime & Scope
+### 1. Memory Lifetime & Scope
 
 ***Local Variables***: Allocated on the Stack. They are "forgotten" as soon as the function returns.
 ```c
@@ -78,7 +76,7 @@ void demo(void)
 }
 ```
 
-2. Practical Embedded Use-Cases
+### 2. Practical Embedded Use-Cases
 
 ***Edge Counting***: Using static to remember the previous state of a GPIO pin to detect a "Rising Edge."
 
@@ -109,7 +107,7 @@ Runs the FSM for six scheduler ticks.
 A static local `s_state` inside `FSM_Tick()` drives the transitions:
 
 ```
-IDLE (tick 1) → RUNNING (ticks 2–3) → FAULT (ticks 4–6)
+IDLE (tick 1) -> RUNNING (ticks 2–3) -> FAULT (ticks 4–6)
 ```
 
 ### Section 5 — One-Time Initialization Guard
@@ -117,8 +115,8 @@ Calls `Peripheral_Init()` six times.
 The static bool `s_initialized` ensures the hardware setup sequence executes exactly once regardless of how many times the function is called.
 
 ```
-Call 1 → [INIT] runs
-Calls 2–6 → [SKIP] silently
+Call 1 -> [INIT] runs
+Calls 2–6 -> [SKIP] silently
 ```
 
 ---
@@ -169,24 +167,24 @@ Removes the entire `build/` directory.
 ## Expected Output
 
 ```
-  ┌─────────────────────────────────────────────────────────────┐
-  │          LOCAL vs STATIC Variable Behavior — Demo           │
-  │         Embedded C  |  C11  |  Professional Reference        │
-  └─────────────────────────────────────────────────────────────┘
+   -------------------------------------------------------------
+  |          LOCAL vs STATIC Variable Behavior — Demo           |
+  |         Embedded C  |  C11  |  Professional Reference       |
+   -------------------------------------------------------------
 
 =================================================================
-  SECTION: 1. Local vs Static — Core Behavior
+  SECTION: 1. Local vs Static - Core Behavior
 =================================================================
 
   Calling VarDemo_RunLocal()  6 times:
 
-    Local  variable  |  counter =  1  |  &counter = 0x7ffd...  ← changes
+    Local  variable  |  counter =  1  |  &counter = 0x7ffd...  <- changes
     Local  variable  |  counter =  1  |  &counter = 0x7ffd...
     ...
 
   Calling VarDemo_RunStatic() 6 times:
 
-    Static variable  |  counter =  1  |  &counter = 0x5561...  ← fixed
+    Static variable  |  counter =  1  |  &counter = 0x5561...  <- fixed
     Static variable  |  counter =  2  |  &counter = 0x5561...
     Static variable  |  counter =  3  |  &counter = 0x5561...
     ...
@@ -222,9 +220,9 @@ This project targets compliance with the following standards:
 
 - **Language:** C11 (`-std=c11`)
 - **MISRA-C 2012** alignment:
-  - Rule 9.1 — all local variables initialized at declaration
-  - Rule 16.4 — all `switch` statements have a `default` clause
-  - Rule 2.4 — no unused type declarations
+  - Rule 9.1 - all local variables initialized at declaration
+  - Rule 16.4 - all `switch` statements have a `default` clause
+  - Rule 2.4 - no unused type declarations
 - **Naming conventions:**
   - `Module_FunctionName()` for public API functions
   - `s_variable_name` prefix for static (file/function scope) variables

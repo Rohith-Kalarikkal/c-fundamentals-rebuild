@@ -31,28 +31,24 @@ global_vs_extern/
 
 ## Key Concepts
 
-1. Global & Extern (Shared Memory)
+### 1. Global & Extern (Shared Memory)
 
 ***Definition***: `g_system_tick_ms` is defined in `system_config.c`. This allocates actual RAM.
-
 ***Declaration***: The extern keyword in `system_config.h` allows `main.c`, `sensor.c`, and `actuator.c` to share the exact same memory address.
-
 ***Volatile***: Used for the system tick to ensure the compiler always reads the latest value from RAM (essential for variables updated by hardware timers or ISRs).
 
-2. Static (Private Memory)
+### 2. Static (Private Memory)
 
 Variables like `s_read_count` (in `sensor.c`) and `s_current_level` (in `actuator.c`) are marked static.
 
 This prevents other files from accessing them directly, ensuring Encapsulation. Access is only allowed through "Getter" functions like `Sensor_GetReadCount()`.
 
-3. Defensive Programming
+### 3. Defensive Programming
 
 The code is designed to catch logic errors at runtime:
 
 ***Initialization Guards***: Modules check if the system is "ON" before starting.
-
 ***Boundary Checks***: The Actuator rejects any drive level above 100%.
-
 ***Null Pointer Protection***: The Sensor module validates pointers before writing data.
 
 ---
