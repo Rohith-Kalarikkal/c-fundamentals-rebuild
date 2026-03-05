@@ -1,0 +1,29 @@
+# ==============================================================================
+# Git Ignore for Volatile, Const & ISR
+# ==============================================================================
+
+# --- Build Artefacts ---
+# Ignore the entire build directory (objects and binaries)
+build/
+
+# Compiled Executables (Windows)
+*.exe
+*.out
+*.app
+vol_con_isr.exe
+vol_con_isr
+
+# Object files and Libraries
+*.o
+*.obj
+*.a
+*.lib
+
+# Debug symbols and IDE folders
+.vscode/
+*.dSYM/
+.DS_Store
+
+# Intermediate build files
+*.i
+*.s
